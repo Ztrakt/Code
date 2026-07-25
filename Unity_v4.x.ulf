@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<DeveloperData Value="True">
+    <License id="Terms">
+        <ClientProvided Version="1" Value="True"/>
+        <DeveloperData Version="1" Value="True"/>
+        <Features>
+            <Feature Value="3"/>
+            <Feature Value="4"/>
+            <Feature Value="5"/>
+            <Feature Value="9"/>
+            <Feature Value="10"/>
+            <Feature Value="11"/>
+            <Feature Value="12"/>
+            <Feature Value="13"/>
+            <Feature Value="14"/>
+            <Feature Value="15"/>
+            <Feature Value="19"/>
+            <Feature Value="21"/>
+            <Feature Value="26"/>
+            <Feature Value="27"/>
+            <Feature Value="28"/>
+            <Feature Value="29"/>
+            <Feature Value="30"/>
+            <Feature Value="31"/>
+            <Feature Value="32"/>
+            <Feature Value="33"/>
+            <Feature Value="34"/>
+            <Feature Value="35"/>
+        </Features>
+        <LicensorProvided Version="1" Value="True"/>
+        <Key Value="U3-FREE-LICN-GENR-4XXX-XXXX"/>
+        <MachineBindings>
+            <Binding Key="1" Value="ManualActivation"/>
+        </MachineBindings>
+        <MachineID Value="ManualActivation"/>
+        <Option Value="Free"/>
+    </License>
+</DeveloperData>
