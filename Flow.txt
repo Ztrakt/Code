@@ -1,0 +1,22 @@
+Hello. I am reverse engineering 'Crash Twinsanity' (Xbox version) to identically replicate its physics and movement in Unity using a Concurrent Layered and Structural State Finite State Machine (FSM) in C#.
+
+I designed this specific architecture to solve and avoid the following critical gameplay programming issues:
+1. Physics overlapping ('Force Wrestling'): If I used independent components with booleans, multiple scripts would try to overwrite 'Rigidbody.velocity' in the same frame (e.g., running and spinning competing for control). The FSM guarantees mutual exclusion so that only the corresponding state handles forces.
+2. Hybrid state explosion: To avoid creating infinite combined states (like a state for running+spinning, or running+spinning+carrying Cortex), I use parallel Concurrent Layers (Locomotion for feet/gravity and Actions for hands/attacks) and full-context Structural States (like the Coop mode with Cortex, which inherits its own weight rules, alters jump height, and blocks the double jump).
+3. Shared Global Mechanics and Functions: To avoid duplicating code, I keep global scripts active at all times (e.g., input reading, timers, or native 'IsGrounded' floor detection math). Individual FSM states simply 'borrow' or invoke these centralized functions when their input gates and transitions allow it.
+
+I am using two tools in parallel and have already discovered how they connect:
+1. Ghidra: Analyzing 'default.xbe' with a community symbol file. I have already located key functions like 'ExecuteFromCallContext' across several action Namespaces.
+2. TwinsanityEditor: Which I use to view high-level behavior scripts (units, logical conditionals, and action calls with decimal IDs and Hexadecimal float arguments).
+
+My current workflow is as follows:
+- I look for a movement script in TwinsanityEditor (e.g., 'COM_CRASH_SPIN' or 'COM_GENERIC_CHARACTER_MOVING_LAND').
+- I identify the 'Action' ID that triggers the script and its float arguments (e.g., Action 139 with float 1.0 for the spin, or Action 117 with floats 12.0 and 0.4 for landing).
+- I convert the ID to Hexadecimal (139 = 0x08B / 117 = 0x075) and go to Ghidra to search for the 'Action0xXXX::ExecuteFromCallContext' function in the Symbol Table.
+- I analyze the decompiled C code in Ghidra to see which offsets, registers, vectors, or bitmasks ('instStateFlags') are altered by that native data injection.
+
+From now on, act as an expert software engineer in reverse engineering and gameplay programming in Unity. I need you to help me with the following:
+1. When I share screenshots or data from an Action in Ghidra, help me translate native mathematical operations (matrix multiplications, interpolations, bitwise operations like 'instStateFlags & 8') into understandable physics logic in Unity.
+2. Help me structure each of these actions as a C# State within our Layered FSM or as a sub-system/modifier, indicating which global functions it should reuse, which inputs it blocks or allows (transition gates), and using the exact float values I find in the editor so that the movement is identical, step by step.
+
+Stop here, confirm that you understand this final development architecture along with the communication logic between states and global scripts, and wait for me to give you the data for the next script I want to analyze.
