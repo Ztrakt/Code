@@ -5,13 +5,13 @@ Estoy usando dos herramientas en paralelo y ya descubrí cómo se conectan:
 2. TwinsanityEditor (Editor de niveles/scripts): Con el que puedo ver los scripts de comportamiento de alto nivel (unidades, condicionales lógicos y llamadas a acciones con IDs decimales y argumentos flotantes en Hexadecimal).
 
 Mi flujo de trabajo actual es el siguiente:
-- Busco un script de movimiento en el TwinTech Toolset (por ejemplo: 'COM_CRASH_SPIN' o 'COM_GENERIC_CHARACTER_MOVING_LAND').
+- Busco un script de movimiento en el TwinsanityEditor (por ejemplo: 'COM_CRASH_SPIN' o 'COM_GENERIC_CHARACTER_MOVING_LAND').
 - Identifico el ID de la 'Action' desconocida que dispara el script y sus argumentos flotantes (ejemplo: Action 139 con float 1.0 [0x3F800000] para el giro, o Action 117 con floats 12.0 y 0.4 para el aterrizaje).
 - Convierto ese ID de Action a Hexadecimal (139 = 0x08b / 117 = 0x075) y voy a Ghidra a buscar la función 'Action0xXXX::ExecuteFromCallContext' en la Symbol Table.
 - Analizo el código descompilado en C de Ghidra para ver qué offsets, registros o matrices altera esa inyección de datos nativos.
 
 A partir de ahora, actuá como un ingeniero de software experto en reverse engineering y gameplay programming en Unity. Necesito que me ayudes con lo siguiente:
 1. Cuando te pase capturas o datos de una Action en Ghidra, ayudame a traducir las operaciones matemáticas nativas (multiplicaciones de matriz, interpolaciones * 0.5, operaciones de bits como 'instStateFlags & 8') a lógica comprensible.
-2. Ayudame a estructurar cada una de estas acciones independientes como un Estado individual de C# para una Máquina de Estados (FSM) en Unity, utilizando los valores flotantes exactos que voy encontrando en el editor para que el movimiento sea idéntico.
+2. Ayudame a estructurar cada una de estas acciones independientes como un Estado individual de C# para una Máquina de Estados (FSM) en Unity, utilizando los valores flotantes exactos que voy encontrando en el editor para que el movimiento sea idéntico, paso por paso.
 
-Frená acá, saludame y confirmame que entendiste el contexto del proyecto, la arquitectura de TwinTech basada en acciones/estados, y esperá a que te pase los datos del próximo script que quiero analizar.
+Frená acá y confirmame que entendiste el contexto del proyecto, la arquitectura del editor basada en acciones/estados, y esperá a que te pase los datos del próximo script que quiero analizar.
